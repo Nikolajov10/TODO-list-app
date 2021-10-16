@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{%block title %}
+    Add
+{% endblock %}
+
+
+{% block content %}
+<style>
+    body {
+        background-color: lightblue;
+    }
+</style>
+<div align="center" class="form-group">
+    <h1>Add Task</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div align="center">
+        <h4>Title</h4></div> 
+        <input type="text" name="title" id="title"><hr>
+        <textarea id="desc" name="desc" placeholder="Description" rows="3"
+        class="form-control"></textarea><br>
+        <div align="left">
+        <h5>Due to:</h5></div> 
+        <input type="date" id="due" name="due"> <br>
+        <hr>
+        <div align="left">
+            <h5>Priority:</h5></div> 
+            <font color="red">High </font><input type="radio" id="priority" name="priority" value="High">
+            <font color="khaki">Medium </font><input type="radio" id="priority" name="priority" value="Medium">
+            <font color="green">Low </font><input type="radio" id="priority" name="priority" value="Low">
+            <br>
+        <hr>
+        <button type="submit" class="btn btn-primary">Add item</button>
+    </form>
+</div>
+{% endblock content %}
+    
+    

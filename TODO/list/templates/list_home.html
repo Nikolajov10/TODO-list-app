@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+<div class="container page-todo bootstrap snippets bootdeys">
+    <div class="col-sm-12 tasks">
+        <div class="task-list">
+            <h1>{{user.name}}'s tasks</h1>
+            
+            {% for task in tasks %}
+                
+                {% if task.priority == "High" %}
+                <div class="priority high"><span>high priority</span></div>
+                {% elif task.priority == "Medium" %}
+                <div class="priority medium"><span>medium priority</span></div>
+                {% else %}
+                <div class="priority low"><span>low priority</span></div>
+                {% endif %}
+                <div class="task high">
+                    <div class="desc">
+                        <div class="title">{{task.title}}</div>
+                        <div>{{task.description}}</div>
+                    </div>
+                    <div class="time">
+                        <div class="date">{{task.due_date}} </div>
+                        <div>
+                            
+                            {% if task.diff < 0 %}
+                                <font color="red"><b>Task expired!</b></font>
+                            {% elif task.diff == 0 %}
+                                <font color="red" size="2px">Task expires today!</font>
+                            {% else %}
+                                Task expires in {{task.diff}} 
+                                {% if task.diff == 1 %}
+                                    day.
+                                {% else %}
+                                    days.
+                                {% endif %}
+                            {% endif %}
+                                
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix" align="right">
+                    <a href="/delete/{{task.id}}"><font color="purple">Delete</font></a>
+                </div>
+            {% endfor %}
+            <hr>
+            <div align="center">
+                <a href="/add-item">
+                    <input type="button" class="btn btn-info" value="Add task">
+                </a>
+            </div>
+            
+        </div>		
+    </div>
+    </div>
+
+{% endblock %}
